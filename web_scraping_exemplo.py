@@ -1,11 +1,14 @@
-# Extraindo dados da internet (HTML)
-# Ref: livro "Data Science from Scratch" de Joel Grus
+"""
+Extraindo dados da internet (HTML)
+Ref: livro "Data Science from Scratch" de Joel Grus
+"""
 
 import requests
 from bs4 import BeautifulSoup
 
-url = "https://www.gov.br/pt-br/categorias/assistencia-social/programas-sociais/assistencia-direta"
-soup = BeautifulSoup(requests.get(url).text, "html5lib")
+URL = "https://www.gov.br/pt-br/categorias/assistencia-social/programas-sociais/assistencia-direta"
+html = requests.get(URL).text
+soup = BeautifulSoup(html, "html5lib")
 
 first_parag = soup.find("p")    # ou somente soup.p
 print("Parágrafo HTML")
@@ -29,4 +32,3 @@ print("Lista de serviços:")
 servicos = soup("li", "servico")
 for i, servico in enumerate(servicos):
     print(i, servico.a.text.strip())
-
